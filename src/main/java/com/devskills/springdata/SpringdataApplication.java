@@ -5,11 +5,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.devskills.springdata.models.Author;
 //import com.devskills.springdata.models.Author;
 import com.devskills.springdata.repositories.AuthorRepository;
 import com.devskills.springdata.repositories.VideoRepository;
-import com.github.javafaker.Faker;
 //import com.github.javafaker.Faker;
 
 @SpringBootApplication
@@ -25,7 +23,7 @@ public class SpringdataApplication {
 			VideoRepository videoRepository
 	) {
 		return args -> {
-			for (int i = 0; i < 50; i++) {
+			/*for (int i = 0; i < 50; i++) {
 				Faker faker = new Faker();
 				var author = Author.builder()
 				.firstName(faker.name().firstName())
@@ -35,7 +33,7 @@ public class SpringdataApplication {
 				.build();
 				
 				authorRepository.save(author);
-			}
+			}*/
 			
 			/*var author = Author.builder()
 					.id(1)
@@ -52,8 +50,20 @@ public class SpringdataApplication {
 					.build();
 			videoRepository.save(video);*/
 			
-			var authors = authorRepository.findAllByFirstNameInIgnoreCase(new String[]{"ja", "ranee", "risa", "luther"});
-			System.out.println(authors);
+			// var authors = authorRepository.findAllByFirstNameInIgnoreCase(new String[]{"ja", "ranee", "landon", "luther"});
+			
+			// update author a set a.age = 22 where a.id = 1
+			//authorRepository.updateAuthor(90, 50);
+			
+			// update author a set a.age = 95
+			//authorRepository.updateAllAuthorAges(95);
+			
+			// find by named query
+			/*authorRepository.findByNamedQuery(96)
+				.forEach(System.out::println);*/
+			
+			// update by named query
+			//authorRepository.updateByNamedQuery(22);
 		};
 	}
 
