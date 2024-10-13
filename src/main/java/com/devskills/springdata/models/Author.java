@@ -4,6 +4,7 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,7 +33,8 @@ public class Author extends BaseEntity {
 	private int age;
 	
 	@ManyToMany(
-			mappedBy = "authors"
+			mappedBy = "authors",
+			fetch = FetchType.EAGER
 	)
 	private List<Course> courses;
 
