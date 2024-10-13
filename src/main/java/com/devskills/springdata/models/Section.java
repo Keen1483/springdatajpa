@@ -2,9 +2,10 @@ package com.devskills.springdata.models;
 
 import java.util.List;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,23 +18,21 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 @Entity
-public class Author extends BaseEntity {
+public class Section extends BaseEntity {
 	
-	private String firstName;
+	private String name;
 	
-	private String lastName;
+	private int sectionOrder;
 	
-	@Column(
-			unique = true,
-			nullable = false
+	@ManyToOne
+	@JoinColumn(
+			name = "course_id"
 	)
-	private String email;
+	private Course course;
 	
-	private int age;
-	
-	@ManyToMany(
-			mappedBy = "authors"
+	@OneToMany(
+			mappedBy = "section"
 	)
-	private List<Course> courses;
+	private List<Lecture> lectures;
 
 }
