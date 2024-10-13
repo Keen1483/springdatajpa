@@ -4,10 +4,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.domain.Specification;
 
-//import com.devskills.springdata.models.Author;
+import com.devskills.springdata.models.Author;
 import com.devskills.springdata.repositories.AuthorRepository;
 import com.devskills.springdata.repositories.VideoRepository;
+import com.devskills.springdata.specification.AuthorSpecification;
 //import com.github.javafaker.Faker;
 
 @SpringBootApplication
@@ -64,6 +66,14 @@ public class SpringdataApplication {
 			
 			// update by named query
 			//authorRepository.updateByNamedQuery(22);
+			
+			Specification<Author> spec = Specification
+					.where(AuthorSpecification.hasAge(22))
+					.or(AuthorSpecification.firstNameLike("ris"))
+					.and(AuthorSpecification.firstNameLike("a"))
+					;
+			authorRepository.findAll(spec)
+				.forEach(System.out::println);
 		};
 	}
 
